@@ -11,12 +11,20 @@
         opacity: 0;
         transform: translateY(20px);
         animation: fadeInUp 0.5s ease forwards;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
+      
       @keyframes fadeInUp {
         to {
           opacity: 1;
           transform: translateY(0);
         }
+      }
+
+      /* Hover animation for game tiles */
+      .game-tile:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
       }
     </style>
   </head>
@@ -31,30 +39,33 @@
     </p>
 
     <script>
-      let games = [];
-      fetch("config/games.json")
-        .then((response) => response.json())
-        .then((data) => {
-          games = data;
-          const container = document.getElementById("game-container");
-          
-          // Display each game with a delay
-          data.forEach((project, index) => {
-            const game = document.createElement("a");
-            game.href = project.link;
-            game.className = "game-link container";
-            game.innerHTML = `
-              <div class="game-tile" style="animation-delay: ${index * 0.1}s;">
-                <img class="game-icon" src="${project.imgSrc}" alt="icon" loading="lazy" />
-                <p class="game-title">${project.title}</p>
-              </div>`;
-            
-            container.appendChild(game);
-          });
+     let games = [];
+fetch("config/games.json")
+  .then((response) => response.json())
+  .then((data) => {
+    games = data;
+    const container = document.getElementById("game-container");
+    
+    data.forEach((project, index) => {
+      const game = document.createElement("a");
+      game.href = project.link;
+      game.className = "game-link container";
+      game.innerHTML = `
+        <div class="game-tile">
+          <img class="game-icon" src="${project.imgSrc}" alt="icon" loading="lazy" />
+          <p class="game-title">${project.title}</p>
+        </div>`;
+      
+      // Apply animation delay to each tile
+      const gameTile = game.querySelector(".game-tile");
+      gameTile.style.animationDelay = `${index * 0.1}s`;
+      
+      container.appendChild(game);
+    });
 
-          document.getElementById("loader").style.display = "none";
-        })
-        .catch((error) => console.error("Error:", error));
+    document.getElementById("loader").style.display = "none";
+  })
+  .catch((error) => console.error("Error:", error));
 
       function searchGames() {
         const input = document.getElementById("search");
