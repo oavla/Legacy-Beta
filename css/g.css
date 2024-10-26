@@ -81,7 +81,7 @@ input[type="text"]::placeholder {
 }
 
 .game-icon {
-  width: 80%;
+  width: 100%;
   height: 180px;
   object-fit: cover;
   border-radius: 15px;
