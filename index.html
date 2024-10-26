@@ -1,108 +1,44 @@
 <!DOCTYPE html>
-<html lang="en-US">
-  <head>
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Legacy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-      body {
-        background: linear-gradient(-45deg, #121212, #222222, #121212, #1e1e1e);
-        background-size: 400% 400%;
-        animation: gradient 10s ease infinite;
-        color: #ffffff;
-        font-family: 'Poppins', sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        overflow: hidden;
-      }
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legacy | Beta</title>
+    <link href="css/home.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <canvas></canvas>
+  
+    <div class="container">
+        <h1><span id="auto-typed-text"></span><span id="cursor">|</span></h1>
+        <p>Fast, Simple, Effortless.</p>
+        <button class="cta-button" onmouseover="explodeStars(event)" onclick="window.location.href='/projects.html'">
+           Get Started
+        </button>
+    </div>
+    
+    <script src="js/home.js"></script>
 
-      @keyframes gradient {
-        0% {
-          background-position: 0% 50%;
+    <script>
+    const text = "Welcome to Legacy."; 
+    const typingSpeed = 150; 
+    let index = 0;
+
+    function typeText() {
+        if (index < text.length) {
+            document.getElementById('auto-typed-text').textContent += text.charAt(index);
+            index++;
+            setTimeout(typeText, typingSpeed); 
+        } else {
+            document.getElementById('cursor').style.display = 'none'; 
         }
-        50% {
-          background-position: 100% 50%;
-        }
-        100% {
-          background-position: 0% 50%;
-        }
-      }
+    }
 
-      h1 {
-        font-size: 3em;
-        text-align: center;
-        animation: fadeIn 2s ease-in-out;
-      }
+    window.onload = function() {
+        typeText();
+    };
+</script>
 
-      #subtitle {
-        font-size: 1.5em;
-        opacity: 0;
-        animation: fadeIn 4s ease-in-out forwards;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-
-      button {
-        cursor: pointer;
-        background-color: #22c55e;
-        border: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        font-size: 16px;
-        border-radius: 20px;
-        margin-top: 20px;
-        transition: transform 0.3s ease, background-color 0.3s ease;
-      }
-
-      button:hover {
-        transform: scale(1.1);
-        background-color: #1fa653;
-      }
-
-      .secondary-button {
-        background-color: #b625cc;
-        margin-top: 5px;
-      }
-
-      .secondary-button:hover {
-        background-color: #a122b0;
-      }
-
-      p {
-        text-align: center;
-        max-width: 600px;
-        margin: 20px auto;
-      }
-
-      a {
-        text-decoration: none;
-      }
-
-    </style>
-  </head>
-  <body>
-    <h1>Legacy</h1>
-    <p>
-      Fast, simple, effortless.<br />
-      <a href="/projects.html"><button>Start playing!</button></a><br />
-      <br />
-    </p>
-    <p>Thanks 3kh0 for the games<br /><br /></p>
-    <script src="/js/main.js"></script>
-  </body>
+</body>
 </html>
