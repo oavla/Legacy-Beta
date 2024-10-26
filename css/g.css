@@ -64,7 +64,7 @@ input[type="text"]::placeholder {
 
 /* Game Tile Styling */
 .game-tile {
-  background-color: rgba(44, 44, 44, 0.7);
+  background-color: rgba(44, 44, 44, 0.147);
   border-radius: 20px;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s, box-shadow 0.3s;
@@ -72,7 +72,7 @@ input[type="text"]::placeholder {
   text-align: center;
   padding: 25px;
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .game-tile:hover {
@@ -81,8 +81,8 @@ input[type="text"]::placeholder {
 }
 
 .game-icon {
-  width: 100%;
-  height: 220px;
+  width: 80%;
+  height: 180px;
   object-fit: cover;
   border-radius: 15px;
 }
