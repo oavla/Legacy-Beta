@@ -207,19 +207,29 @@
         text-decoration: none;
         color: inherit;
       }
+
+	    canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
     </style>
   </head>
   <body>
+
+	      <canvas></canvas>
+
     <h1>Projects</h1>
     <input type="text" id="search" onkeyup="searchGames()" placeholder="Search for games..." />
     <div id="loader"></div>
     <div id="game-container" class="flex-container"></div>
     <p class="text-center">
       <a href="/index.html">
-        <button>Go to the homepage</button>
       </a>
     </p>
-    <button id="back-to-top">Back to top</button>
     <script>
       let games = [];
       fetch("config/games.json").then((response) => response.json()).then((data) => {
@@ -271,5 +281,8 @@
         document.documentElement.scrollTop = 0;
       };
     </script>
+
+	      <script src="js/home.js"></script>
+
   </body>
 </html>
