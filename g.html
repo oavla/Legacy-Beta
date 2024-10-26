@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>Legacy | Beta</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+       <link href="css/g.css" rel="stylesheet">
+  </head>
+  <body>
+
+	      <canvas></canvas>
+
+    <h1>Projects</h1>
+    <input type="text" id="search" onkeyup="searchGames()" placeholder="Search for games..." />
+    <div id="loader"></div>
+    <div id="game-container" class="flex-container"></div>
+    <p class="text-center">
+      <a href="/index.html">
+      </a>
+    </p>
+    <script>
+      let games = [];
+      fetch("config/games.json").then((response) => response.json()).then((data) => {
+        games = data;
+        const container = document.getElementById("game-container");
+        data.forEach((project) => {
+          const game = document.createElement("a");
+          game.href = project.link;
+          game.className = "game-link container";
+          game.innerHTML = `
+            
+				<div class="game-tile">
+					<img class="game-icon" src="${project.imgSrc}" alt="icon" />
+					<p class="game-title">${project.title}</p>
+				</div>`;
+          container.appendChild(game);
+        });
+        document.getElementById("loader").style.display = "none";
+      }).catch((error) => console.error("Error:", error));
+
+      function searchGames() {
+        const input = document.getElementById("search");
+        const filter = input.value.toUpperCase();
+        const container = document.getElementById("game-container");
+        container.innerHTML = "";
+        games.filter((game) => game.title.toUpperCase().includes(filter)).forEach((project) => {
+          const game = document.createElement("a");
+          game.href = project.link;
+          game.className = "game-link container";
+          game.innerHTML = `
+            
+				<div class="game-tile">
+					<img class="game-icon" src="${project.imgSrc}" alt="icon" loading="lazy" />
+					<p class="game-title">${project.title}</p>
+				</div>`;
+          container.appendChild(game);
+        });
+      }
+      const backToTopButton = document.getElementById('back-to-top');
+      window.onscroll = function() {
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+          backToTopButton.style.display = "block";
+        } else {
+          backToTopButton.style.display = "none";
+        }
+      };
+      backToTopButton.onclick = function() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+      };
+    </script>
+
+	      <script src="js/home.js"></script>
+
+  </body>
+</html>
