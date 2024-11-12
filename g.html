@@ -4,7 +4,7 @@
     <title>Legacy | Beta</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link href="css/.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
     <style>
       /* Apply pixelated font style */
       body, h1, p, .game-title, input, a, button {
@@ -23,8 +23,9 @@
         background-color: #333;
         color: #fff;
         text-align: center;
+        overflow: auto;
         margin: 0;
-        padding: 0;
+        padding: 0 20px;
       }
 
       /* Canvas for animated stars background */
@@ -39,7 +40,7 @@
 
       /* Header styling */
       h1 {
-        margin: 20px;
+        margin-top: 40px;
         color: #ffcc00;
         font-size: 24px;
         text-transform: uppercase;
@@ -47,9 +48,9 @@
 
       /* Pixel-styled input field styling */
       #search {
-        font-size: 12px;
+        font-size: 14px;
         padding: 10px;
-        border: 3px solid #000;
+        border: 3px solid #444;
         background-color: #222;
         color: #ffcc00;
         width: 80%;
@@ -57,12 +58,12 @@
         display: block;
         outline: none;
         text-align: center;
-        transition: background-color 0.3s, color 0.3s;
+        transition: all 0.2s ease;
       }
 
       #search:focus {
-        background-color: #333;
-        color: #ffdd33;
+        border-color: #ffcc00;
+        box-shadow: 0 0 5px #ffcc00;
       }
 
       /* Game container and tile styling */
@@ -71,57 +72,63 @@
         flex-wrap: wrap;
         justify-content: center;
         margin-top: 20px;
+        gap: 20px;
       }
 
       .game-link {
         text-decoration: none;
         color: #ffcc00;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .game-link:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
       }
 
       .game-tile {
         width: 150px;
-        margin: 15px;
-        padding: 10px;
+        padding: 15px;
         text-align: center;
-        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
-        border-radius: 5px;
-        transition: transform 0.3s, box-shadow 0.3s;
+        background-color: #444;
+        border-radius: 8px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        transition: background-color 0.2s ease;
       }
 
       .game-tile:hover {
-        transform: translateY(-5px);
-        box-shadow: 0px 0px 12px rgba(255, 204, 0, 0.6);
+        background-color: #555;
       }
 
       .game-icon {
         width: 100%;
         height: auto;
-        border-radius: 3px;
+        border-radius: 4px;
         border: 2px solid #000;
       }
 
       .game-title {
         font-size: 14px;
-        margin-top: 8px;
+        margin-top: 12px;
       }
 
       /* Pixel-styled back button */
       .text-center a {
         display: inline-block;
-        padding: 8px 12px;
-        margin-top: 20px;
+        padding: 10px 15px;
+        margin-top: 30px;
         background-color: #222;
         border: 3px solid #000;
-        box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+        border-radius: 6px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         color: #ffcc00;
         text-decoration: none;
-        transition: background-color 0.3s, color 0.3s, transform 0.2s;
+        transition: background-color 0.2s ease, transform 0.2s ease;
       }
 
       .text-center a:hover {
-        background-color: #444;
-        color: #ffdd33;
-        transform: translateY(-3px) scale(1.05);
+        background-color: #333;
+        transform: translateY(-4px) scale(1.03);
       }
     </style>
   </head>
