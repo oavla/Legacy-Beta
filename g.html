@@ -20,7 +20,7 @@
 
       /* Body and canvas background */
       body {
-        background-color: #333;
+        background-color: #111;  /* Darker background */
         color: #fff;
         text-align: center;
         overflow: auto;
@@ -36,6 +36,7 @@
         width: 100%;
         height: 100%;
         z-index: -1;
+        background-color: #000; /* Ensures space-like black background */
       }
 
       /* Header styling */
@@ -209,7 +210,7 @@
             const game = document.createElement("a");
             game.href = project.link;
             game.className = "game-link container";
-            game.innerHTML = `
+            game.innerHTML = ` 
               <div class="game-tile" style="animation-delay: ${index * 0.1}s;">
                 <img class="game-icon" src="${project.imgSrc}" alt="icon" loading="lazy" />
                 <p class="game-title">${project.title}</p>
