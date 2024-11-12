@@ -3,9 +3,19 @@
   <head>
     <title>Legacy | Beta</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="css/g.css" rel="stylesheet">
     <style>
+      /* Apply pixelated font style */
+      body, h1, p, .game-title, input {
+        font-family: 'Press Start 2P', cursive;
+      }
+
+      /* General styling for pixelated text */
+      h1, p, .game-title, input::placeholder {
+        text-shadow: 1px 1px 0px #000;
+      }
+
       /* Loading animation CSS */
       .game-tile {
         opacity: 0;
@@ -25,6 +35,14 @@
       .game-tile:hover {
         transform: translateY(-5px) scale(1.05);
         box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Pixelated input field styling */
+      #search {
+        font-size: 12px;
+        padding: 10px;
+        border: 2px solid #000;
+        background-color: #f0f0f0;
       }
     </style>
   </head>
