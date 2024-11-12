@@ -7,85 +7,198 @@
     <link href="css/g.css" rel="stylesheet">
     <style>
       /* Apply pixelated font style */
-      body, h1, p, .game-title, input {
+      body, h1, p, .game-title, input, a, button {
         font-family: 'Press Start 2P', cursive;
       }
 
       /* General styling for pixelated text */
-      h1, p, .game-title, input::placeholder {
+      h1, p, .game-title, input::placeholder, a, button {
         text-shadow: 1px 1px 0px #000;
         font-size: 17px;
+        color: #ffcc00;
       }
 
-      /* Loading animation CSS */
-      .game-tile {
-        opacity: 0;
-        transform: translateY(20px);
-        animation: fadeInUp 0.5s ease forwards;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-      
-      @keyframes fadeInUp {
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+      /* Body and canvas background */
+      body {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        overflow: hidden;
       }
 
-      /* Hover animation for game tiles */
-      .game-tile:hover {
-        transform: translateY(-5px) scale(1.05);
-        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+      /* Canvas for animated stars background */
+      canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
       }
 
-      /* Pixelated input field styling */
+      /* Header styling */
+      h1 {
+        margin: 20px;
+        color: #ffcc00;
+        font-size: 24px;
+        text-transform: uppercase;
+      }
+
+      /* Pixel-styled input field styling */
       #search {
         font-size: 12px;
         padding: 10px;
+        border: 3px solid #000;
+        background-color: #222;
+        color: #ffcc00;
+        width: 80%;
+        margin: 10px auto;
+        display: block;
+        outline: none;
+        text-align: center;
+      }
+
+      /* Game container and tile styling */
+      #game-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .game-link {
+        text-decoration: none;
+        color: #ffcc00;
+      }
+
+      .game-tile {
+        width: 150px;
+        margin: 15px;
+        padding: 10px;
+        text-align: center;
+        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+      }
+
+      .game-icon {
+        width: 100%;
+        height: auto;
+        border-radius: 3px;
         border: 2px solid #000;
-        background-color: #f0f0f0;
+      }
+
+      .game-title {
+        font-size: 14px;
+        margin-top: 8px;
+      }
+
+      /* Pixel-styled back button */
+      .text-center a {
+        display: inline-block;
+        padding: 8px 12px;
+        margin-top: 20px;
+        background-color: #222;
+        border: 3px solid #000;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+        color: #ffcc00;
+        text-decoration: none;
+        transition: transform 0.2s;
+      }
+
+      .text-center a:hover {
+        transform: translateY(-3px) scale(1.05);
       }
     </style>
   </head>
   <body>
-    <canvas></canvas>
+    <canvas id="starsCanvas"></canvas>
     <h1>Projects</h1>
     <input type="text" id="search" onkeyup="searchGames()" placeholder="Search for games..." />
-    <div id="loader"></div>
     <div id="game-container" class="flex-container"></div>
     <p class="text-center">
-      <a href="/index.html"></a>
+      <a href="/index.html">Back to Home</a>
     </p>
 
     <script>
-     let games = [];
-fetch("config/games.json")
-  .then((response) => response.json())
-  .then((data) => {
-    games = data;
-    const container = document.getElementById("game-container");
-    
-    data.forEach((project, index) => {
-      const game = document.createElement("a");
-      game.href = project.link;
-      game.className = "game-link container";
-      game.innerHTML = `
-        <div class="game-tile">
-          <img class="game-icon" src="${project.imgSrc}" alt="icon" loading="lazy" />
-          <p class="game-title">${project.title}</p>
-        </div>`;
-      
-      // Apply animation delay to each tile
-      const gameTile = game.querySelector(".game-tile");
-      gameTile.style.animationDelay = `${index * 0.1}s`;
-      
-      container.appendChild(game);
-    });
+      /* Space Travel Stars Animation */
+      const canvas = document.getElementById('starsCanvas');
+      const ctx = canvas.getContext('2d');
+      const stars = [];
+      const numStars = 200;
 
-    document.getElementById("loader").style.display = "none";
-  })
-  .catch((error) => console.error("Error:", error));
+      // Resize canvas to cover the entire screen
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
 
+      // Initialize stars with properties for "space travel" effect
+      function initStars() {
+        for (let i = 0; i < numStars; i++) {
+          stars.push({
+            x: Math.random() * canvas.width - canvas.width / 2,
+            y: Math.random() * canvas.height - canvas.height / 2,
+            z: Math.random() * canvas.width,
+            radius: Math.random() * 1.5 + 0.5,
+          });
+        }
+      }
+      initStars();
+
+      // Draw and animate stars
+      function animateStars() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        stars.forEach((star) => {
+          star.z -= 2;  // Speed of stars moving forward
+          if (star.z <= 0) {
+            // Reset star to the far distance when it reaches the center
+            star.x = Math.random() * canvas.width - canvas.width / 2;
+            star.y = Math.random() * canvas.height - canvas.height / 2;
+            star.z = canvas.width;
+          }
+
+          // Calculate star position on screen
+          const sx = (star.x / star.z) * canvas.width + canvas.width / 2;
+          const sy = (star.y / star.z) * canvas.height + canvas.height / 2;
+          const radius = (star.radius / star.z) * canvas.width;
+
+          // Draw star
+          ctx.beginPath();
+          ctx.arc(sx, sy, radius, 0, Math.PI * 2);
+          ctx.fillStyle = '#ffffff';
+          ctx.fill();
+        });
+
+        requestAnimationFrame(animateStars);
+      }
+      animateStars();
+
+      /* Game Tiles Setup */
+      let games = [];
+      fetch("config/games.json")
+        .then((response) => response.json())
+        .then((data) => {
+          games = data;
+          const container = document.getElementById("game-container");
+
+          data.forEach((project, index) => {
+            const game = document.createElement("a");
+            game.href = project.link;
+            game.className = "game-link container";
+            game.innerHTML = `
+              <div class="game-tile" style="animation-delay: ${index * 0.1}s;">
+                <img class="game-icon" src="${project.imgSrc}" alt="icon" loading="lazy" />
+                <p class="game-title">${project.title}</p>
+              </div>`;
+
+            container.appendChild(game);
+          });
+        })
+        .catch((error) => console.error("Error:", error));
+
+      /* Search Function */
       function searchGames() {
         const input = document.getElementById("search");
         const filter = input.value.toUpperCase();
@@ -106,7 +219,5 @@ fetch("config/games.json")
         });
       }
     </script>
-
-    <script src="js/home.js"></script>
   </body>
 </html>
