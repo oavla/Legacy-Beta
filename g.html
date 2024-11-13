@@ -326,12 +326,15 @@
         .catch((error) => console.error("Error:", error));
 
        
-        function searchGames() {
+       function searchGames() {
   const input = document.getElementById("search");
   const filter = input.value.toUpperCase();
   const container = document.getElementById("game-container");
   
-  container.innerHTML = "";
+  const noResults = document.querySelector("#game-container p");
+  if (noResults) {
+    noResults.remove();
+  }
 
   if (filter === "") {
     return; 
