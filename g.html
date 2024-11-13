@@ -3,78 +3,78 @@
   <head>
     <title>Legacy | Beta</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link href="css/style.css" rel="stylesheet" />
     <style>
-      /* Apply pixelated font style */
-      body, h1, p, .game-title, input, a, button, .navbar a {
-        font-family: 'Press Start 2P', cursive;
+            /* Apply pixelated font style */
+            body, h1, p, .game-title, input, a, button {
+              font-family: 'Press Start 2P', cursive;
+            }
+
+            /* General styling for pixelated text */
+            h1, p, .game-title, input::placeholder, a, button {
+              text-shadow: 1px 1px 0px #000;
+              font-size: 17px;
+              color: #ffcc00;
+            }
+
+            /* Body and canvas background */
+            body {
+              background-color: #111;  /* Darker background */
+              color: #fff;
+              text-align: center;
+              overflow: auto;
+              margin: 0;
+              padding: 0 20px;
+            }
+
+            /* Style for the scrollbar container */
+      ::-webkit-scrollbar {
+        width: 12px; /* Set the width of the scrollbar */
+        height: 12px; /* Set the height of the horizontal scrollbar */
       }
 
-      /* General styling for pixelated text */
-      h1, p, .game-title, input::placeholder, a, button, .navbar a {
-        text-shadow: 1px 1px 0px #000;
-        font-size: 17px;
-        color: #ffcc00;
-      }
-
-      /* Body and canvas background */
-      body {
-        background-color: #111;  /* Darker background */
-        color: #fff;
-        text-align: center;
-        overflow: auto;
-        margin: 0;
-        padding: 0 20px;
-      }
-
-      .navbar {
-        background-color: #222;
-        padding: 10px;
-        display: flex;
-        justify-content: center;
-        position: fixed;
-        gap: 30px;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 10;
-      }
-
-
-      .navbar a {
-        text-decoration: none;
-        color: #ffcc00;
-        padding: 12px 18px;
-        border: 2px solid #444;
-        border-radius: 8px;
-        font-size: 12px;
-        font-weight: bold;
-        transition: background-color 0.3s ease, transform 0.3s ease;
-      }
-
-      .navbar a:hover {
+      /* Style for the scrollbar thumb (the draggable part) */
+      ::-webkit-scrollbar-thumb {
         background-color: #ffcc00;
-        color: #222;
-        transform: translateY(-4px) scale(1.1);
+        border-radius: 5px;
+        border: 2px solid #222; /* Adds a dark border around the thumb */
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Shadow effect for the thumb */
       }
 
-      .navbar a:active {
-        background-color: #e6b800;
+      /* Style for the scrollbar track (the area the thumb moves along) */
+      ::-webkit-scrollbar-track {
+        background-color: #111; /* Darker track */
+        border-radius: 5px;
       }
 
-      /* Canvas for animated stars background */
-      canvas {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        background-color: #000; /* Ensures space-like black background */
+      /* Add pixelated effect to the scrollbar */
+      ::-webkit-scrollbar-thumb {
+        background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2224%22 height=%2224%22 viewBox=%220 0 24 24%22%3E%3Cpath d=%22M2 12c0 4.41 3.59 8 8 8s8-3.59 8-8-3.59-8-8-8-8 3.59-8 8zm8 6c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z%22/%3E%3C/svg%3E'); /* Pixel pattern for the thumb */
+        background-size: 6px 6px; /* Adjust the size of the pixelated pattern */
       }
 
-      h1 {
+      /* Pixelated hover effect for the scrollbar thumb */
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: #ff9900; /* Slightly different color when hovered */
+        transform: scale(1.1); /* Slight zoom effect when hovered */
+      }
+
+            /* Canvas for animated stars background */
+            canvas {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              z-index: -1;
+              background-color: #000; /* Ensures space-like black background */
+            }
+
+                 h1 {
         margin-top: 90px;
         color: #ffcc00;
         font-size: 24px;
@@ -86,93 +86,127 @@
         text-shadow: 0 0 5px #ffcc00, 0 0 10px #ffcc00, 0 0 15px #ffcc00; /* Optional glow effect */
       }
 
-      /* Pixel-styled input field styling */
-      #search {
-        font-size: 14px;
-        padding: 10px;
-        border: 3px solid #444;
-        background-color: #222;
-        color: #ffcc00;
-        width: 80%;
-        margin: 10px auto;
-        display: block;
-        outline: none;
-        text-align: center;
-        transition: all 0.2s ease;
-      }
+      .navbar {
+              background-color: #222;
+              padding: 10px;
+              display: flex;
+              justify-content: center;
+              position: fixed;
+              gap: 30px;
+              top: 0;
+              left: 0;
+              right: 0;
+              z-index: 10;
+            }
 
-      #search:focus {
-        border-color: #ffcc00;
-        box-shadow: 0 0 5px #ffcc00;
-      }
 
-      /* Game container and tile styling */
-      #game-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-top: 20px;
-        gap: 20px;
-      }
+            .navbar a {
+              text-decoration: none;
+              color: #ffcc00;
+              padding: 12px 18px;
+              border: 2px solid #444;
+              border-radius: 8px;
+              font-size: 12px;
+              font-weight: bold;
+              transition: background-color 0.3s ease, transform 0.3s ease;
+            }
 
-      .game-link {
-        text-decoration: none;
-        color: #ffcc00;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-      }
+            .navbar a:hover {
+              background-color: #ffcc00;
+              color: #222;
+              transform: translateY(-4px) scale(1.1);
+            }
 
-      .game-link:hover {
-        transform: translateY(-5px);
-      }
+            .navbar a:active {
+              background-color: #e6b800;
+            }
 
-      .game-tile {
-        width: 150px;
-        padding: 15px;
-        text-align: center;
-        background-color: #222;
-        border-radius: 8px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-        transition: background-color 0.2s ease;
-      }
+            /* Pixel-styled input field styling */
+            #search {
+              font-size: 14px;
+              padding: 10px;
+              border: 3px solid #444;
+              background-color: #222;
+              color: #ffcc00;
+              width: 80%;
+              margin: 10px auto;
+              display: block;
+              outline: none;
+              text-align: center;
+              transition: all 0.2s ease;
+            }
 
-      .game-tile:hover {
-        background-color: #555;
-      }
+            #search:focus {
+              border-color: #ffcc00;
+              box-shadow: 0 0 5px #ffcc00;
+            }
 
-      .game-icon {
-        width: 100%;
-        height: auto;
-        border-radius: 4px;
-        border: 2px solid #000;
-      }
+            /* Game container and tile styling */
+            #game-container {
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: center;
+              margin-top: 20px;
+              gap: 20px;
+            }
 
-      .game-title {
-        font-size: 14px;
-        margin-top: 12px;
-      }
+            .game-link {
+              text-decoration: none;
+              color: #ffcc00;
+              transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
 
-      /* Pixel-styled back button */
-      .text-center a {
-        display: inline-block;
-        padding: 10px 15px;
-        margin-top: 30px;
-        background-color: #222;
-        border: 3px solid #000;
-        border-radius: 6px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        color: #ffcc00;
-        text-decoration: none;
-        transition: background-color 0.2s ease, transform 0.2s ease;
-      }
+            .game-link:hover {
+              transform: translateY(-5px);
+            }
 
-      .text-center a:hover {
-        background-color: #333;
-        transform: translateY(-4px) scale(1.03);
-      }
+            .game-tile {
+              width: 150px;
+              padding: 15px;
+              text-align: center;
+              background-color: #222;
+              border-radius: 8px;
+              box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+              transition: background-color 0.2s ease;
+            }
+
+            .game-tile:hover {
+              background-color: #555;
+            }
+
+            .game-icon {
+              width: 100%;
+              height: auto;
+              border-radius: 4px;
+              border: 2px solid #000;
+            }
+
+            .game-title {
+              font-size: 14px;
+              margin-top: 12px;
+            }
+
+            /* Pixel-styled back button */
+            .text-center a {
+              display: inline-block;
+              padding: 10px 15px;
+              margin-top: 30px;
+              background-color: #222;
+              border: 3px solid #000;
+              border-radius: 6px;
+              box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+              color: #ffcc00;
+              text-decoration: none;
+              transition: background-color 0.2s ease, transform 0.2s ease;
+            }
+
+            .text-center a:hover {
+              background-color: #333;
+              transform: translateY(-4px) scale(1.03);
+            }
     </style>
   </head>
   <body>
-    <!-- Pixelated NavBar -->
     <div class="navbar">
       <a href="/index.html">Home</a>
       <a href="/about.html">About</a>
@@ -182,7 +216,12 @@
 
     <canvas id="starsCanvas"></canvas>
     <h1>Projects</h1>
-    <input type="text" id="search" onkeyup="searchGames()" placeholder="Search for games..." />
+    <input
+      type="text"
+      id="search"
+      onkeyup="searchGames()"
+      placeholder="Search for games..."
+    />
     <div id="game-container" class="flex-container"></div>
     <p class="text-center">
       <a href="/index.html">Back to Home</a>
@@ -247,52 +286,45 @@
 
       /* Game Tiles Setup */
       let games = [];
-      fetch('/config/games.json')
-        .then(response => response.json())
-        .then(data => {
+      fetch("config/games.json")
+        .then((response) => response.json())
+        .then((data) => {
           games = data;
-          displayGames();
-        });
+          const container = document.getElementById("game-container");
 
-      function displayGames() {
-        const gameContainer = document.getElementById('game-container');
-        gameContainer.innerHTML = '';
+          data.forEach((project, index) => {
+            const game = document.createElement("a");
+            game.href = project.link;
+            game.className = "game-link container";
+            game.innerHTML = `
+              <div class="game-tile" style="animation-delay: ${index * 0.1}s;">
+                <img class="game-icon" src="${project.imgSrc}" alt="icon" loading="lazy" />
+                <p class="game-title">${project.title}</p>
+              </div>`;
 
-        games.forEach((game) => {
-          const gameTile = document.createElement('div');
-          gameTile.classList.add('game-tile');
-          
-          const gameLink = document.createElement('a');
-          gameLink.classList.add('game-link');
-          gameLink.href = game.link;
+            container.appendChild(game);
+          });
+        })
+        .catch((error) => console.error("Error:", error));
 
-          const gameImage = document.createElement('img');
-          gameImage.classList.add('game-icon');
-          gameImage.src = game.image;
-          
-          const gameTitle = document.createElement('div');
-          gameTitle.classList.add('game-title');
-          gameTitle.textContent = game.name;
-
-          gameLink.appendChild(gameImage);
-          gameLink.appendChild(gameTitle);
-          gameTile.appendChild(gameLink);
-          gameContainer.appendChild(gameTile);
-        });
-      }
-
-      /* Search functionality */
+      /* Search Function */
       function searchGames() {
-        const searchQuery = document.getElementById("search").value.toLowerCase();
-        const gameLinks = document.querySelectorAll(".game-link");
+        const input = document.getElementById("search");
+        const filter = input.value.toUpperCase();
+        const container = document.getElementById("game-container");
+        container.innerHTML = "";
 
-        gameLinks.forEach((game) => {
-          const gameTitle = game.querySelector(".game-title").textContent.toLowerCase();
-          if (gameTitle.includes(searchQuery)) {
-            game.style.display = "block";
-          } else {
-            game.style.display = "none";
-          }
+        games.filter((game) => game.title.toUpperCase().includes(filter)).forEach((project, index) => {
+          const game = document.createElement("a");
+          game.href = project.link;
+          game.className = "game-link container";
+          game.innerHTML = `
+            <div class="game-tile" style="animation-delay: ${index * 0.1}s;">
+              <img class="game-icon" src="${project.imgSrc}" alt="icon" loading="lazy" />
+              <p class="game-title">${project.title}</p>
+            </div>`;
+
+          container.appendChild(game);
         });
       }
     </script>
