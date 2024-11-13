@@ -9,19 +9,16 @@
     />
     <link href="css/style.css" rel="stylesheet" />
     <style>
-      /* Apply pixelated font style */
       body, h1, p, .game-title, input, a, button {
         font-family: 'Press Start 2P';
       }
 
-      /* General styling for pixelated text */
       h1, p, .game-title, input::placeholder, a, button {
         text-shadow: 1px 1px 0px #000;
         font-size: 17px;
         color: #ffffff;
       }
 
-      /* Body and canvas background */
       body {
         background-color: #111;
         color: #fff;
@@ -32,37 +29,33 @@
       }
 
       ::-webkit-scrollbar {
-        width: 12px; /* Set the width of the scrollbar */
-        height: 12px; /* Set the height of the horizontal scrollbar */
+        width: 12px; 
+        height: 12px; 
       }
 
-      /* Style for the scrollbar thumb (the draggable part) */
       ::-webkit-scrollbar-thumb {
         background-color: #ffffff;
         border-radius: 5px;
-        border: 2px solid #222; /* Adds a dark border around the thumb */
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Shadow effect for the thumb */
+        border: 2px solid #222; 
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); 
       }
 
-      /* Style for the scrollbar track (the area the thumb moves along) */
       ::-webkit-scrollbar-track {
-        background-color: #111; /* Darker track */
+        background-color: #111; 
         border-radius: 5px;
       }
 
-      /* Add pixelated effect to the scrollbar */
       ::-webkit-scrollbar-thumb {
         background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2224%22 height=%2224%22 viewBox=%220 0 24 24%22%3E%3Cpath d=%22M2 12c0 4.41 3.59 8 8 8s8-3.59 8-8-3.59-8-8-8-8 3.59-8 8zm8 6c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z%22/%3E%3C/svg%3E'); /* Pixel pattern for the thumb */
-        background-size: 6px 6px; /* Adjust the size of the pixelated pattern */
+        background-size: 6px 6px; 
       }
 
-      /* Pixelated hover effect for the scrollbar thumb */
+     
       ::-webkit-scrollbar-thumb:hover {
-        background-color: #b0b0b0; /* Slightly different color when hovered */
-        transform: scale(1.1); /* Slight zoom effect when hovered */
+        background-color: #b0b0b0;
+        transform: scale(1.1); 
       }
 
-      /* Canvas for animated stars background */
       canvas {
         position: fixed;
         top: 0;
@@ -85,7 +78,6 @@
         text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 15px #ffffff;
       }
 
-      /* Cursor blink effect */
       .cursor {
         display: inline-block;
         width: 5px;
@@ -136,7 +128,6 @@
         transform: translateY(-4px) scale(1.1);
       }
 
-      /* Pixel-styled input field styling */
       #search {
         font-size: 14px;
         padding: 13px;
@@ -158,7 +149,6 @@
         transition: box-shadow 0.3s ease, transform 0.3s ease;
       }
 
-      /* Game container and tile styling */
       #game-container {
         display: flex;
         flex-wrap: wrap;
@@ -203,7 +193,6 @@
         margin-top: 12px;
       }
 
-      /* Pixel-styled back button */
       .text-center a {
         display: inline-block;
         padding: 10px 15px;
@@ -249,13 +238,11 @@
     </p>
 
     <script>
-      /* Space Travel Stars Animation */
       const canvas = document.getElementById('starsCanvas');
       const ctx = canvas.getContext('2d');
       const stars = [];
       const numStars = 200;
 
-      // Resize canvas to cover the entire screen
       function resizeCanvas() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -263,7 +250,6 @@
       resizeCanvas();
       window.addEventListener('resize', resizeCanvas);
 
-      // Initialize stars with properties for "space travel" effect
       function initStars() {
         for (let i = 0; i < numStars; i++) {
           stars.push({
@@ -276,25 +262,21 @@
       }
       initStars();
 
-      // Draw and animate stars
       function animateStars() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         stars.forEach((star) => {
-          star.z -= 2;  // Speed of stars moving forward
+          star.z -= 2;  
           if (star.z <= 0) {
-            // Reset star to the far distance when it reaches the center
             star.x = Math.random() * canvas.width - canvas.width / 2;
             star.y = Math.random() * canvas.height - canvas.height / 2;
             star.z = canvas.width;
           }
 
-          // Calculate star position on screen
           const sx = (star.x / star.z) * canvas.width + canvas.width / 2;
           const sy = (star.y / star.z) * canvas.height + canvas.height / 2;
           const radius = (star.radius / star.z) * canvas.width;
 
-          // Draw star on canvas
           ctx.beginPath();
           ctx.arc(sx, sy, radius, 0, 2 * Math.PI);
           ctx.fillStyle = "#ffffff";
@@ -343,26 +325,39 @@
         })
         .catch((error) => console.error("Error:", error));
 
-      /* Search Function */
-      function searchGames() {
-        const input = document.getElementById("search");
-        const filter = input.value.toUpperCase();
-        const container = document.getElementById("game-container");
-        container.innerHTML = "";
+       
+        function searchGames() {
+  const input = document.getElementById("search");
+  const filter = input.value.toUpperCase();
+  const container = document.getElementById("game-container");
+  
+  container.innerHTML = "";
 
-        games.filter((game) => game.title.toUpperCase().includes(filter)).forEach((project, index) => {
-          const game = document.createElement("a");
-          game.href = project.link;
-          game.className = "game-link container";
-          game.innerHTML = `
-            <div class="game-tile" style="animation-delay: ${index * 0.1}s;">
-              <img class="game-icon" src="${project.imgSrc}" alt="icon" loading="lazy" />
-              <p class="game-title">${project.title}</p>
-            </div>`;
+  if (filter === "") {
+    return; 
+  }
 
-          container.appendChild(game);
-        });
-      }
+  const filteredGames = games.filter((game) => game.title.toUpperCase().includes(filter));
+
+  if (filteredGames.length === 0) {
+    const noResults = document.createElement("p");
+    noResults.textContent = "No game was found for that search :(";
+    noResults.style.color = "#ffffff"; 
+    container.appendChild(noResults);
+  } else {
+    filteredGames.forEach((project, index) => {
+      const game = document.createElement("a");
+      game.href = project.link;
+      game.className = "game-link container";
+      game.innerHTML = `
+        <div class="game-tile" style="animation-delay: ${index * 0.1}s;">
+          <img class="game-icon" src="${project.imgSrc}" alt="icon" loading="lazy" />
+          <p class="game-title">${project.title}</p>
+        </div>`;
+      container.appendChild(game);
+    });
+  }
+}
     </script>
   </body>
 </html>
