@@ -247,7 +247,7 @@
 
       /* Game Tiles Setup */
       let games = [];
-      fetch('games.json')
+      fetch('/config/games.json')
         .then(response => response.json())
         .then(data => {
           games = data;
