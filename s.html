@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>die lit</title>
+  
+    <style>
+        html, body, iframe {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            border: none;
+        }
+        iframe {
+            display: block;
+        }
+        /* Smaller retro-style button */
+        .back-button {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            padding: 5px 10px;
+            background-color: #000;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            cursor: pointer;
+            z-index: 1000;
+            border: 2px solid #00ff00;
+            text-transform: uppercase;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        /* Hover effect */
+        .back-button:hover {
+            background-color: #111;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <button class="back-button" onclick="window.location.href = 'https://fwaeh.pages.dev'">Back to Home</button>
+    <iframe src="https://oav.pages.dev"></iframe>
+</body>
+</html>
