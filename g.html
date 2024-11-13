@@ -11,14 +11,14 @@
     <style>
             /* Apply pixelated font style */
             body, h1, p, .game-title, input, a, button {
-              font-family: 'Press Start 2P', cursive;
+              font-family: 'Press Start 2P';
             }
 
             /* General styling for pixelated text */
             h1, p, .game-title, input::placeholder, a, button {
               text-shadow: 1px 1px 0px #000;
               font-size: 17px;
-              color: #5100ff;
+              color: #ffffff;
             }
 
             /* Body and canvas background */
@@ -39,7 +39,7 @@
 
       /* Style for the scrollbar thumb (the draggable part) */
       ::-webkit-scrollbar-thumb {
-        background-color: #5100ff;
+        background-color: #ffffff;
         border-radius: 5px;
         border: 2px solid #222; /* Adds a dark border around the thumb */
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Shadow effect for the thumb */
@@ -59,7 +59,7 @@
 
       /* Pixelated hover effect for the scrollbar thumb */
       ::-webkit-scrollbar-thumb:hover {
-        background-color: #3d00c1; /* Slightly different color when hovered */
+        background-color: #ffffff; /* Slightly different color when hovered */
         transform: scale(1.1); /* Slight zoom effect when hovered */
       }
 
@@ -76,14 +76,14 @@
 
                  h1 {
         margin-top: 90px;
-        color: #5100ff;
+        color: #ffffff;
         font-size: 34px;
         text-transform: uppercase;
         position: relative;
         display: inline-block;
         padding: 10px 20px;  /* Adjust padding for size */
         background-color: #000;
-        text-shadow: 0 0 5px #5100ff, 0 0 10px #5100ff, 0 0 15px #5100ff; /* Optional glow effect */
+        text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 15px #ffffff; /* Optional glow effect */
       }
 
       .navbar {
@@ -102,7 +102,7 @@
 
             .navbar a {
               text-decoration: none;
-              color: #5100ff;
+              color: #ffffff;
               padding: 12px 18px;
               border: 2px solid #444;
               border-radius: 8px;
@@ -112,22 +112,22 @@
             }
 
             .navbar a:hover {
-              background-color: #5100ff;
+              background-color: #ffffff;
               color: #222;
               transform: translateY(-4px) scale(1.1);
             }
 
             .navbar a:active {
-              background-color: #4404cd;
+              background-color: #ffffff;
             }
 
             /* Pixel-styled input field styling */
             #search {
               font-size: 14px;
-              padding: 10px;
+              padding: 13px;
               border: 3px solid #444;
               background-color: #222;
-              color: #5100ff;
+              color: #ffffff;
               width: 80%;
               margin: 10px auto;
               display: block;
@@ -137,9 +137,12 @@
             }
 
             #search:focus {
-              border-color: #5100ff;
-              box-shadow: 0 0 5px #5100ff;
-            }
+  border-color: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
+  transform: scale(1.02); /* Slight enlargement on focus */
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
 
             /* Game container and tile styling */
             #game-container {
@@ -152,7 +155,7 @@
 
             .game-link {
               text-decoration: none;
-              color: #5100ff;
+              color: #ffffff;
               transition: transform 0.2s ease, box-shadow 0.2s ease;
             }
 
@@ -195,14 +198,19 @@
               border: 3px solid #000;
               border-radius: 6px;
               box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-              color: #5100ff;
+              color: #ffffff;
               text-decoration: none;
               transition: background-color 0.2s ease, transform 0.2s ease;
             }
 
             .text-center a:hover {
-              background-color: #333;
-              transform: translateY(-4px) scale(1.03);
+              background-color: #ffffff;
+              color: #222;
+              transform: translateY(-4px) scale(1.1);
+            }
+            
+            .text-center a:active {
+              background-color: #ffffff;
             }
     </style>
   </head>
