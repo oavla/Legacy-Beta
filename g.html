@@ -18,7 +18,7 @@
             h1, p, .game-title, input::placeholder, a, button {
               text-shadow: 1px 1px 0px #000;
               font-size: 17px;
-              color: #ffcc00;
+              color: #5100ff;
             }
 
             /* Body and canvas background */
@@ -39,7 +39,7 @@
 
       /* Style for the scrollbar thumb (the draggable part) */
       ::-webkit-scrollbar-thumb {
-        background-color: #ffcc00;
+        background-color: #5100ff;
         border-radius: 5px;
         border: 2px solid #222; /* Adds a dark border around the thumb */
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Shadow effect for the thumb */
@@ -59,7 +59,7 @@
 
       /* Pixelated hover effect for the scrollbar thumb */
       ::-webkit-scrollbar-thumb:hover {
-        background-color: #ff9900; /* Slightly different color when hovered */
+        background-color: #3d00c1; /* Slightly different color when hovered */
         transform: scale(1.1); /* Slight zoom effect when hovered */
       }
 
@@ -76,14 +76,14 @@
 
                  h1 {
         margin-top: 90px;
-        color: #ffcc00;
+        color: #5100ff;
         font-size: 24px;
         text-transform: uppercase;
         position: relative;
         display: inline-block;
         padding: 10px 20px;  /* Adjust padding for size */
         background-color: #000;
-        text-shadow: 0 0 5px #ffcc00, 0 0 10px #ffcc00, 0 0 15px #ffcc00; /* Optional glow effect */
+        text-shadow: 0 0 5px #5100ff, 0 0 10px #5100ff, 0 0 15px #5100ff; /* Optional glow effect */
       }
 
       .navbar {
@@ -102,7 +102,7 @@
 
             .navbar a {
               text-decoration: none;
-              color: #ffcc00;
+              color: #5100ff;
               padding: 12px 18px;
               border: 2px solid #444;
               border-radius: 8px;
@@ -112,13 +112,13 @@
             }
 
             .navbar a:hover {
-              background-color: #ffcc00;
+              background-color: #5100ff;
               color: #222;
               transform: translateY(-4px) scale(1.1);
             }
 
             .navbar a:active {
-              background-color: #e6b800;
+              background-color: #4404cd;
             }
 
             /* Pixel-styled input field styling */
@@ -127,7 +127,7 @@
               padding: 10px;
               border: 3px solid #444;
               background-color: #222;
-              color: #ffcc00;
+              color: #5100ff;
               width: 80%;
               margin: 10px auto;
               display: block;
@@ -137,8 +137,8 @@
             }
 
             #search:focus {
-              border-color: #ffcc00;
-              box-shadow: 0 0 5px #ffcc00;
+              border-color: #5100ff;
+              box-shadow: 0 0 5px #5100ff;
             }
 
             /* Game container and tile styling */
@@ -152,7 +152,7 @@
 
             .game-link {
               text-decoration: none;
-              color: #ffcc00;
+              color: #5100ff;
               transition: transform 0.2s ease, box-shadow 0.2s ease;
             }
 
@@ -195,7 +195,7 @@
               border: 3px solid #000;
               border-radius: 6px;
               box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-              color: #ffcc00;
+              color: #5100ff;
               text-decoration: none;
               transition: background-color 0.2s ease, transform 0.2s ease;
             }
@@ -209,9 +209,8 @@
   <body>
     <div class="navbar">
       <a href="/index.html">Home</a>
-      <a href="/about.html">About</a>
       <a href="/projects.html">Projects</a>
-      <a href="/contact.html">Contact</a>
+      <a href="/search.html">Search</a>
     </div>
 
     <canvas id="starsCanvas"></canvas>
