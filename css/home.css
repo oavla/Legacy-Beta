@@ -88,7 +88,7 @@ body {
 h1 {
     font-size: 50px;
     margin-bottom: 10px;
-    text-shadow: 0 0 3px #ff4081, 0 0 10px #ff4081, 0 0 20px #ff4081, 0 0 30px #ff4081, 0 0 40px #ff4081;
+    text-shadow: 0 0 3px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff;
     color: #fff;
 }
 
@@ -101,7 +101,7 @@ p {
 .cta-button {
     position: relative;
     overflow: hidden;
-    background-color: #ff4081;
+    background-color: #fff;
     color: #fff;
     border: none;
     border-radius: 25px;
@@ -115,7 +115,7 @@ p {
     position: absolute;
     width: 8px;
     height: 8px;
-    background-color: #ff4081;
+    background-color: #fff;
     border-radius: 50%;
     pointer-events: none;
     opacity: 0;
@@ -145,7 +145,7 @@ canvas {
 #cursor {
     font-weight: bold;
     font-size: 50px;
-    color: #ff4081;
+    color: #fff;
     animation: blink 1s infinite;
 }
 
