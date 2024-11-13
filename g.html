@@ -41,7 +41,7 @@
       }
 
       ::-webkit-scrollbar-track {
-        background-color: #111; 
+        background-color: #111;
         border-radius: 5px;
       }
 
@@ -50,9 +50,8 @@
         background-size: 6px 6px; 
       }
 
-     
       ::-webkit-scrollbar-thumb:hover {
-        background-color: #b0b0b0;
+        background-color: #b0b0b0; 
         transform: scale(1.1); 
       }
 
@@ -230,7 +229,7 @@
       type="text"
       id="search"
       onkeyup="searchGames()"
-      placeholder="🔎 Search for games..."
+      placeholder="🔎 Search for games.."
     />
     <div id="game-container" class="flex-container"></div>
     <p class="text-center">
@@ -262,6 +261,7 @@
       }
       initStars();
 
+      
       function animateStars() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -326,41 +326,25 @@
         .catch((error) => console.error("Error:", error));
 
        
-       function searchGames() {
-  const input = document.getElementById("search");
-  const filter = input.value.toUpperCase();
-  const container = document.getElementById("game-container");
-  
-  const noResults = document.querySelector("#game-container p");
-  if (noResults) {
-    noResults.remove();
-  }
+        function searchGames() {
+        const input = document.getElementById("search");
+        const filter = input.value.toUpperCase();
+        const container = document.getElementById("game-container");
+        container.innerHTML = "";
 
-  if (filter === "") {
-    return; 
-  }
+        games.filter((game) => game.title.toUpperCase().includes(filter)).forEach((project, index) => {
+          const game = document.createElement("a");
+          game.href = project.link;
+          game.className = "game-link container";
+          game.innerHTML = 
+            <div class="game-tile" style="animation-delay: ${index * 0.1}s;">
+              <img class="game-icon" src="${project.imgSrc}" alt="icon" loading="lazy" />
+              <p class="game-title">${project.title}</p>
+            </div>;
 
-  const filteredGames = games.filter((game) => game.title.toUpperCase().includes(filter));
-
-  if (filteredGames.length === 0) {
-    const noResults = document.createElement("p");
-    noResults.textContent = "No game was found for that search :(";
-    noResults.style.color = "#ffffff"; 
-    container.appendChild(noResults);
-  } else {
-    filteredGames.forEach((project, index) => {
-      const game = document.createElement("a");
-      game.href = project.link;
-      game.className = "game-link container";
-      game.innerHTML = `
-        <div class="game-tile" style="animation-delay: ${index * 0.1}s;">
-          <img class="game-icon" src="${project.imgSrc}" alt="icon" loading="lazy" />
-          <p class="game-title">${project.title}</p>
-        </div>`;
-      container.appendChild(game);
-    });
-  }
-}
+          container.appendChild(game);
+        });
+      }
     </script>
   </body>
-</html>
+</html> 
